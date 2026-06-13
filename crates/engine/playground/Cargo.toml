@@ -1,0 +1,17 @@
+[package]
+name = "playground"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+# The cognition playground — a 30-line agent-environment loop over
+# `rl_core::Environment`. Lets toy harnesses, examples, and (eventually)
+# WASM widgets train a `TileCodedValue` without the Bevy schedule.
+# Depends only on `rl_core` — deliberately Bevy-free.
+
+[lib]
+name = "playground"
+doctest = false
+
+[dependencies]
+rl_core.workspace = true

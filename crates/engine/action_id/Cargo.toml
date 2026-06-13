@@ -1,0 +1,18 @@
+[package]
+name = "action_id"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+# `ActionTemplateId` — the small, game-agnostic integer action handle shared
+# by the ECS act-identity table (`ecs_core`) and the RL learner key
+# (`rl_core` / `q_learning`). Its own leaf crate (serde-only) so `ecs_core` can
+# use the action key without depending on `rl_core`. Re-exported as
+# `rl_core::ActionTemplateId` for the existing call sites.
+
+[lib]
+name = "action_id"
+doctest = false
+
+[dependencies]
+serde.workspace = true

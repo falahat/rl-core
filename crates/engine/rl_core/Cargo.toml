@@ -1,0 +1,40 @@
+[package]
+name = "rl_core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+# `rl_core` is the generic reinforcement-learning machinery — tile coding,
+# the `ValueFunction` trait, the tile-coded value function, the
+# `ActionTemplateId` action handle, and the `Environment` trait. It is
+# deliberately free of any game-specific content: it depends on nothing
+# but `serde` (and `bevy_ecs` *only* under the default-on `bevy` feature,
+# so the WASM / playground build can drop it). Game content (the
+# `Observation` schema, `WellKnownTemplate`, the `Learner`) lives in
+# `q_learning`, which builds on top of this crate.
+
+[lib]
+name = "rl_core"
+doctest = false
+
+[features]
+# Default-on: app and the cognition stack consume `rl_core` with Bevy
+# Component derives turned on. Turn off (`--no-default-features`) for
+# WASM widgets and isolated harnesses that don't want `bevy_ecs`.
+default = ["bevy"]
+bevy = ["dep:bevy_ecs"]
+
+[dependencies]
+# `bevy_ecs` is ECS infrastructure (not game content) — `Observation`
+# carries a `#[derive(Component)]` so agents can hold one directly.
+# Optional so the WASM build can drop it via `--no-default-features`.
+bevy_ecs = { workspace = true, optional = true }
+serde.workspace = true
+# The shared pure-leaf primitives, re-exported as `rl_core::hash` /
+# `rl_core::ActionTemplateId` for existing call sites.
+determinism.workspace = true
+action_id.workspace = true
+
+[dev-dependencies]
+# Used by the `Observation` serde round-trip test.
+serde_json.workspace = true

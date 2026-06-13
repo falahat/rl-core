@@ -1,0 +1,16 @@
+[package]
+name = "determinism"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+# The workspace's determinism kit: FNV-1a + SplitMix64 + unit-window draws —
+# the ONE canonical home for reproducibility-critical bit-mixing. Pure std,
+# zero dependencies, so it is reachable from every tier including the WASM
+# widgets. Previously lived as `rl_core::hash`; lifted into its own leaf so the
+# foundation (`kernel`) no longer depends on `rl_core` just to hash. Re-exported
+# as `rl_core::hash` for the existing call sites.
+
+[lib]
+name = "determinism"
+doctest = false
