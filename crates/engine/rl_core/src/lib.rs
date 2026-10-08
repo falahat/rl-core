@@ -26,10 +26,10 @@ pub mod value_function;
 // longer reaches up into `rl_core` for them. Re-exported under their historical
 // paths so every call site — including rl_core's own `crate::hash::*` /
 // `crate::action_id::*` — is unchanged.
-pub use determinism as hash;
 pub use action_id;
 pub use action_id::ActionTemplateId;
 pub use agent::Mind;
+pub use determinism as hash;
 pub use environment::{Environment, StepResult};
 pub use observation::Observation;
 pub use policy::{epsilon_explore, greedy_argmax};

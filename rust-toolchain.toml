@@ -1,0 +1,4 @@
+[toolchain]
+# The same rustc the simulator pins; bump both together.
+channel = "1.99.0"
+components = ["rustfmt", "clippy"]
